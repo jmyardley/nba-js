@@ -1,9 +1,12 @@
-var testTeam = "hawks";
+var testTeam = "warriors";
 var teamPlayers = "";
 var list = $("#data");
-var teamStatsArray = [];
 var teamArray = [];
-
+var finalObj = {
+  name: [],
+  min: [],
+  stat: []
+};
 
 //buttons for testing
 $("#button").click(function () {
@@ -21,13 +24,12 @@ $("#button3").click(function () {
 })
 
 function compiler() {
-  var compiledNames = getNames(teamArray);
-  var compiledStats = getStats(teamArray);
+  compiledNames = getNames(teamArray);
+  compiledStats = getStats(teamArray);
 
-  console.log(compiledStats);
-  console.log(compiledNames);
-
+  console.log(finalObj);
 }
+
 
 //builds array of player codes as strings
 function buildTeam(team) {
@@ -36,9 +38,9 @@ function buildTeam(team) {
     $.each(result.league.standard.players, function (i, field) {
       teamArray.push(field.personId);
     });
-  }).done(function(){
+  }).done(function () {
     compiler();
-  });
+  })
 }
 
 //returns array of player names as strings
@@ -53,6 +55,7 @@ function getNames(arr) {
       namesArr.push(nameStr);
     }
   })
+  finalObj.name.push(namesArr);
   return namesArr;
 }
 
@@ -68,7 +71,7 @@ function getStats(arr) {
       statsArr.push(yearStats.plusMinus);
     });
   }
-  console.log(minsArr);
-  console.log(statsArr);
+  finalObj.min.push(minsArr);
+  finalObj.stat.push(statsArr);
   return [minsArr, statsArr];
 }
