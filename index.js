@@ -4,7 +4,6 @@ var list = $("#data");
 var teamStatsArray = [];
 var teamArray = [];
 
-buildTeam(testTeam);
 
 //buttons for testing
 $("#button").click(function () {
@@ -17,15 +16,18 @@ $("#button2").click(function () {
 
 //compiler
 $("#button3").click(function () {
-  
-  var compiledNames = getNames(teamArray);
-  var compiledStats = getStats(teamArray);
-  
-  console.log(compiledStats);
-  console.log(compiledNames);
+  compiler();
+
 })
 
+function compiler() {
+  var compiledNames = getNames(teamArray);
+  var compiledStats = getStats(teamArray);
 
+  console.log(compiledStats);
+  console.log(compiledNames);
+
+}
 
 //builds array of player codes as strings
 function buildTeam(team) {
@@ -34,6 +36,8 @@ function buildTeam(team) {
     $.each(result.league.standard.players, function (i, field) {
       teamArray.push(field.personId);
     });
+  }).done(function(){
+    compiler();
   });
 }
 
@@ -56,7 +60,7 @@ function getNames(arr) {
 function getStats(arr) {
   let minsArr = [];
   let statsArr = [];
-  for (let i=0; i<arr.length; i++){
+  for (let i = 0; i < arr.length; i++) {
     let url = "https://cors-anywhere.herokuapp.com/http://data.nba.net/10s/prod/v1/2020/players/" + arr[i] + "_profile.json";
     $.getJSON(url, function (result) {
       var yearStats = result.league.standard.stats.latest;
