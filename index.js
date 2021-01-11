@@ -46,22 +46,23 @@ function renderNames () {
 }
 
 function renderChart (){
+  var chartData = [];
+  for (let i=0; i<teamArray.length; i++) {
+    chartData.push({
+      x: mins[i],
+      y: stats[i],
+      label: names[i],
+    });
+  }
+  console.log(chartData);
+  Chart.defaults.global.elements.point.radius = 7;
   var ctx = $('#chartHere');
   var scatterChart = new Chart(ctx, {
     type: 'scatter',
     data: {
         datasets: [{
             label: 'Scatter Dataset',
-            data: [{
-                x: -10,
-                y: 0
-            }, {
-                x: 0,
-                y: 10
-            }, {
-                x: 10,
-                y: 5
-            }]
+            data: chartData
         }]
     },
     options: {
@@ -70,6 +71,14 @@ function renderChart (){
                 type: 'linear',
                 position: 'bottom'
             }]
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              var label = chartData[tooltipItem.index].label;
+              return label;
+            }
+          }
         }
     }
 });
