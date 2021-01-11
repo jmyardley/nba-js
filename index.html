@@ -12,7 +12,8 @@
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">NBA JSON Data</span>
         <button id="button">Select Team</button>
-        <button id="button3">Get Stats</button>
+        <button id="button2">Print Names</button>
+        <button id="button3">Create Chart</button>
     </nav>
 
 <div class="container">
@@ -22,9 +23,19 @@
             <ul id="data"></ul>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12" id="tableHere">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="tableHere">
+            <canvas id="chartHere" width="400" height="400"></canvas>
+        </div>
+    </div>
 
 </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
