@@ -129,10 +129,10 @@ function renderChart (){
       $.getJSON(url, function (result) {
         var yearStats = result.league.standard.stats.latest;
 
-        //var selectStat = document.getElementById("pickstat");
-        //selectedStat = selectStat[selectStat.selectedIndex].value;
+        var selectStat = document.getElementById("pickstat");
+        selectedStat = selectStat[selectStat.selectedIndex].value;
         finalObj[arr[i]].min = yearStats.min;
-        finalObj[arr[i]].stat = yearStats.points;
+        finalObj[arr[i]].stat = yearStats[selectedStat];
   
         //console.log(yearStats[selectedStat]);
       });
