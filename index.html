@@ -1,41 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 </head>
+
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">NBA JSON Data</span>
-        <button id="button">Select Team</button>
-        <button id="button2">Print Names</button>
+
+        <select name="teams" id="teams">
+            <option value="hawks">Atlanta</option>
+            <option value="celtics">Boston</option>
+            <option value="nets">Brooklyn</option>
+            <option value="hornets">Charlotte</option>
+            <option value="bulls">Chicago</option>
+            <option value="cavaliers">Cleveland</option>
+            <option value="mavericks">Dallas</option>
+            <option value="nuggets">Denver</option>
+            <option value="pistons">Detroit</option>
+            <option value="warriors">Golden State</option>
+            <option value="rockets">Houston</option>
+            <option value="pacers">Indiana</option>
+            <option value="clippers">LA Clippers</option>
+            <option value="lakers">LA Lakers</option>
+            <option value="grizzlies">Memphis</option>
+            <option value="heat">Miami</option>
+            <option value="bucks">Milwaukee</option>
+            <option value="timberwolves">Minnesota</option>
+            <option value="pelicans">New Orleans</option>
+            <option value="knicks">New York</option>
+            <option value="thunder">Oklahoma City</option>
+            <option value="magic">Orlando</option>
+            <option value="sixers">Phiadelphia</option>
+            <option value="suns">Phoenix</option>
+            <option value="blazers">Portland</option>
+            <option value="kings">Sacramento</option>
+            <option value="spurs">San Antonio</option>
+            <option value="raptors">Toronto</option>
+            <option value="jazz">Utah</option>
+            <option value="wizards">Washington</option>
+        </select>
+<!--         <select name="pickstat" id="pickstat">
+            <option value=points>Points</option>
+            <option value=assists>Assists</option>
+            <option value=blocks>Blocks</option>
+            <option value=steals>Steals</option>
+            <option value=turnovers>Turnovers</option>
+            <option value=pFouls>Fouls</option>
+            <option value=offReb>Offensive Rebounds</option>
+            <option value=defReb>Defensive Rebounds</option>
+            <option value=totReb>Total Rebounds</option>
+            <option value=fgm>FG Made</option>
+            <option value=fga>FG Attempted</option>
+            <option value=tpm>3P Made</option>
+            <option value=tpa>3P Attempted</option>
+            <option value=ftm>FT Made</option>
+            <option value=fta>FT Attempted</option>
+            <option value=plusMinus>+/-</option>
+        </select> -->
+
+        <button id="button">Select Team/Stat</button>
         <button id="button3">Create Chart</button>
     </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Players</h1>
-            <ul id="data"></ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Players</h1>
+                <ul id="data"></ul>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12" id="tableHere">
+        <div class="row">
+            <div class="col-md-12" id="tableHere">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12" id="tableHere">
-            <canvas id="chartHere" width="400" height="400"></canvas>
+        <div class="row">
+            <div class="col-md-12" id="tableHere">
+                <canvas id="chartHere" width="400" height="400"></canvas>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script src="index.js"></script>
 </body>
+
 </html>

@@ -1,22 +1,21 @@
-var testTeam = "hornets";
+var testTeam = "hawks"
 var teamPlayers = "";
 var list = $("#data");
 var teamArray = [];
 var names = [];
 var mins = [];
 var stats = [];
-var finalObj = {
-  name: [],
-  min: [],
-  stat: []
-};
+var finalObj = [];
+var namesArr = [];
 let compiledNames;
 let compiledStats;
 
 
 //buttons for testing
 $("#button").click(function () {
-  buildTeam(testTeam);
+  var select = document.getElementById("teams");
+  selectedTeam = select[select.selectedIndex].value;
+  buildTeam(selectedTeam);
 });
 
 $("#button2").click(function () {
@@ -30,10 +29,11 @@ $("#button3").click(function () {
 })
 
 function compiler() {
-  compiledNames = getNames(teamArray);
-  compiledStats = getStats(teamArray);
+  getNames(teamArray);
 
-  console.log(finalObj);
+  getStats(teamArray);
+
+  //console.log(finalObj);
 }
 
 function renderNames () {
@@ -47,13 +47,14 @@ function renderNames () {
 
 function renderChart (){
   var chartData = [];
-  for (let i=0; i<teamArray.length; i++) {
+  teamArray.forEach(i => {
     chartData.push({
-      x: mins[i],
-      y: stats[i],
-      label: names[i],
+      x: finalObj[i].min,
+      y: finalObj[i].stat,
+      label: finalObj[i].name
     });
-  }
+  })
+  
   console.log(chartData);
   Chart.defaults.global.elements.point.radius = 7;
   var ctx = $('#chartHere');
@@ -87,34 +88,36 @@ function renderChart (){
 
   //builds array of player codes as strings
   function buildTeam(team) {
+    //console.log(testTeam);
     let url = "https://cors-anywhere.herokuapp.com/http://data.nba.net/10s/prod/v1/2020/teams/" + team + "/roster.json";
     $.getJSON(url, function (result) {
       $.each(result.league.standard.players, function (i, field) {
         teamArray.push(field.personId);
+        finalObj[field.personId] = {
+          name: "",
+          min: "",
+          stat: ""
+        };
       });
       compiler();
-      console.log("compiler has run");
+      //console.log("compiler has run");
     }).done(function () {
-      console.log("this chunk running");
-      console.log(names);
+      //console.log("this chunk running");
     })
   }
 
   //returns array of player names as strings
   function getNames(arr) {
-    let namesArr = [];
+    
     let url = "https://cors-anywhere.herokuapp.com/http://data.nba.net/10s/prod/v1/2020/players.json"
     $.getJSON(url, function (result) {
       var plrs = result.league.standard;
       for (let i = 0; i < arr.length; i++) {
         var plr = plrs.filter(player => player.personId === arr[i].toString());
         var nameStr = plr[0].firstName + " " + plr[0].lastName;
-        namesArr.push(nameStr);
+        finalObj[plr[0].personId].name = nameStr;
       }
     })
-    finalObj.name.push(namesArr);
-    names = namesArr;
-    return namesArr;
   }
 
   //get stats
@@ -125,13 +128,14 @@ function renderChart (){
       let url = "https://cors-anywhere.herokuapp.com/http://data.nba.net/10s/prod/v1/2020/players/" + arr[i] + "_profile.json";
       $.getJSON(url, function (result) {
         var yearStats = result.league.standard.stats.latest;
-        minsArr.push(yearStats.min);
-        statsArr.push(yearStats.plusMinus);
+
+        //var selectStat = document.getElementById("pickstat");
+        //selectedStat = selectStat[selectStat.selectedIndex].value;
+        finalObj[arr[i]].min = yearStats.min;
+        finalObj[arr[i]].stat = yearStats.points;
+  
+        //console.log(yearStats[selectedStat]);
       });
     }
-    finalObj.min.push(minsArr);
-    finalObj.stat.push(statsArr);
-    mins = minsArr;
-    stats = statsArr;
-    return [minsArr, statsArr];
+    console.log(finalObj);
   }
