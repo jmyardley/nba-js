@@ -19,7 +19,9 @@ $("#button").click(function () {
 });
 
 $("#button2").click(function () {
-  renderNames();
+  fetch("./rows.json")
+  .then(response => response.json)
+  .then(json => console.log(json))
 })
 
 //compiler
@@ -122,8 +124,6 @@ function renderChart (){
 
   //get stats
   function getStats(arr) {
-    let minsArr = [];
-    let statsArr = [];
     for (let i = 0; i < arr.length; i++) {
       let url = "https://cors-anywhere.herokuapp.com/http://data.nba.net/10s/prod/v1/2020/players/" + arr[i] + "_profile.json";
       $.getJSON(url, function (result) {

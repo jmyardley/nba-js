@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/jmyardley/nba-js/issues"
   },
-  "homepage": "https://github.com/jmyardley/nba-js#readme"
+  "homepage": "https://github.com/jmyardley/nba-js#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.5"
+  }
 }
